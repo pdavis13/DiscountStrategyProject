@@ -6,21 +6,26 @@ package discountstrategyproject;
  */
 public class CheckoutKiosk {
     private Receipt receipt;
-    private OutputStrategy output;
-    
-    public CheckoutKiosk(OutputStrategy output){
-        this.output = output;
-    }
+    private int receiptNum = 0;
+    DataAccessStrategy db;
     
     public final void startSale(String custId, DataAccessStrategy db){
-        receipt = new Receipt(custId, db);
+        receiptNum++;
+        receipt = new Receipt(custId, receiptNum, db);
+        this.db = db;
     }
     
     public final void addItemToSale(String prodId, int qty){
-        receipt.addLineItem(prodId, qty);
+        if(prodId == null)
+            throw new IllegalArgumentException("error: invalid prodId");
+        if(qty < 1)
+            throw new IllegalArgumentException("error: invalid qty");
+        receipt.addLineItem(prodId, qty, db);
     }
     
-    public final void endSale(){
-        output.generateReceipt(receipt.getData());
+    public final void endSaleAndOutputReceipt(OutputStrategy os){
+        if(os == null)
+            throw new IllegalArgumentException("error: OutputStrategy is null at endSaleAndOutputReceipt");
+        os.generateReceipt(receipt.getData());
     }
 }

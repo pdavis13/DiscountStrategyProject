@@ -10,5 +10,7 @@ package discountstrategyproject;
  * @author Peter
  */
 public interface DiscountStrategy {
-    
+    public abstract double getDiscountRate();
+    public abstract void setDiscountRate(double discountRate);
+    public abstract double getDiscountAmt(double unitPrice, int qty);
 }

@@ -13,40 +13,34 @@ public class Product {
     private String productID;
     private String name;
     private double price;
+    private DiscountStrategy discountStrategy;
 
-    public void setPercentOffDiscount(double percentOffDiscount) {
-        this.percentOffDiscount = percentOffDiscount;
-    }
-
-    public void setQtyDiscount(double qtyDiscount) {
-        this.qtyDiscount = qtyDiscount;
-    }
-
-    public String getProductID() {
+    public final String getProductID() {
         return productID;
     }
 
-    public String getName() {
+    public final DiscountStrategy getDiscountStrategy() {
+        return discountStrategy;
+    }
+
+    public final void setDiscountStrategy(DiscountStrategy discountStrategy) {
+        if(discountStrategy == null)
+            throw new IllegalArgumentException("error: attempted to set discount strategy to null");
+        this.discountStrategy = discountStrategy;
+    }
+
+    public final String getName() {
         return name;
     }
 
-    public double getPrice() {
+    public final double getPrice() {
         return price;
     }
-
-    public double getPercentOffDiscount() {
-        return percentOffDiscount;
-    }
-
-    public double getQtyDiscount() {
-        return qtyDiscount;
-    }
-    private double percentOffDiscount;
-    private double qtyDiscount;
     
-    public Product(String productID, String name, double price){
+    public Product(String productID, String name, double price, DiscountStrategy ds){
         this.productID = productID;
         this.name = name;
         this.price = price;
+        discountStrategy = ds;
     }
 }

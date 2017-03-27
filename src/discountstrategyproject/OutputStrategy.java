@@ -10,5 +10,5 @@ package discountstrategyproject;
  * @author Peter
  */
 public interface OutputStrategy {
-    void generateReceipt(String data);
+    public abstract void generateReceipt(String data);
 }

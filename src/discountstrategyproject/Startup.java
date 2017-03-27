@@ -16,6 +16,21 @@ public class Startup {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        DataAccessStrategy db = new InMemoryDataAccess();
+        OutputStrategy os = new GUIOutput();
+        CheckoutKiosk kiosk = new CheckoutKiosk();
+        
+        // Customer #1 sale
+        kiosk.startSale("100", db);
+        kiosk.addItemToSale("B205", 2);
+        kiosk.addItemToSale("A101", 1);
+        kiosk.endSaleAndOutputReceipt(os);
+        
+        // Customer #2 sale
+        kiosk.startSale("200", db);
+        kiosk.addItemToSale("C222", 4);
+        kiosk.addItemToSale("B205", 6);
+        kiosk.endSaleAndOutputReceipt(os);
     }
     
 }

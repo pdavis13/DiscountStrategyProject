@@ -13,11 +13,11 @@ public class Customer {
     private String customerID;
     private String name;
 
-    public String getCustomerID() {
+    public final String getCustomerID() {
         return customerID;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
     
